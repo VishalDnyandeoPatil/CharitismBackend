@@ -51,3 +51,19 @@ todoRoute.get('/:id',Auther(["Super Admin","Admin"]),async(req,res)=>{
         res.send({msg:error.message})
     }
  })
+
+ todoRoute.delete("/delete/:id",Auther(["Super Admin","Admin"]), async(req,res)=>{
+    try {
+        const id = req.params.id;
+        const deleteTodo = await todo.findByIdAndDelete(id);
+        if(deleteTodo){
+            res.send({msg:"Todo deleted"})
+        }
+        else{
+            res.send({msg:"Not found Todo"})
+        }    
+    } 
+    catch (error) {
+        res.send({msg:error.message})
+    }
+ });
