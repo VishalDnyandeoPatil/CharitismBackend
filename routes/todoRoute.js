@@ -27,3 +27,16 @@ todoRoute.get('/:id',Auther(["Super Admin","Admin"]),async(req,res)=>{
         res.send({msg:error.message})
     }
  })
+
+ todoRoute.post('/add',Auther(["Super Admin","Admin"]),async(req,res)=>{
+    try {
+        const data = req.body;
+        const newTodo =  new todo (data);
+        await newTodo.save();
+        res.send({msg:"Todo created"})
+    } 
+    catch (error) {
+        res.send(error.message)    
+    }
+ });
+
