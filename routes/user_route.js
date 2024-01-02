@@ -39,7 +39,7 @@ userRoute.post("/login", async(req,res)=>{
        }
        const correctPass = await bcrypt.compareSync( payload.password,User.password);
        if(correctPass){
-        const token = await jwt.sign({ email:User.email,userId:User._id}, process.env.secretKey, { expiresIn: '2m' });
+        const token = await jwt.sign({ email:User.email,userId:User._id}, process.env.secretKey, { expiresIn: '5m' });
         
         const refreshtoken = await jwt.sign({ email:User.email,userId:User._id}, process.env.refreshsecretKey, { expiresIn: '3m' });
         res.json({msg:"Login Sucessful",token, refreshtoken})
