@@ -1,6 +1,6 @@
 const express = require('express');
 const {connection}= require('./config/db');
-
+const{userRoute}
 
 const app = express();
 app.use(express.json());
