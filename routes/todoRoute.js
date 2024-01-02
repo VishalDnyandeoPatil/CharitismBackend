@@ -40,3 +40,14 @@ todoRoute.get('/:id',Auther(["Super Admin","Admin"]),async(req,res)=>{
     }
  });
 
+ todoRoute.patch('/update/:id',Auther(["Super Admin"]), async(req,res)=>{
+    try {
+        const data = req.body;
+        const id = req.params.id;
+        const update = await todo.findByIdAndUpdate(id,data);
+        res.send({msg:"Todo Updated"})
+    } 
+    catch (error) {
+        res.send({msg:error.message})
+    }
+ })
