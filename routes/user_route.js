@@ -75,3 +75,5 @@ userRoute.get("/refreshtoken", (req,res)=>{
     }
     res.send("new token");
 })
+
+module.exports={userRoute};
