@@ -60,3 +60,18 @@ userRoute.get("/logout", auth,(req,res)=>{
     
     res.send("Logout Success");
 })
+
+userRoute.get("/refreshtoken", (req,res)=>{
+    const refreshtoken = req.headers.authorization?.split(" ")[1];
+    
+    const decoded= jwt.verify(refreshtoken,process.env.refreshsecretKey);
+
+    if(decoded){
+        const token =  jwt.sign({ email:decoded.email,userId:decoded._id}, process.env.secretKey, { expiresIn: '1d' });
+        return res.send(token)
+    }
+    else{
+        res.send("TIME's OVER, Login Again.. ")
+    }
+    res.send("new token");
+})
